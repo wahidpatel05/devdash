@@ -4,6 +4,8 @@ version = "0.1.0"
 description = "Terminal dashboard for hackathon/dev projects: git status, dev servers, live logs"
 readme = "README.md"
 requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
 dependencies = ["textual>=8.0"]
 keywords = ["tui", "textual", "dashboard", "git", "dev-server", "omarchy", "hyprland"]
 

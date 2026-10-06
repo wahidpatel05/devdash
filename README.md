@@ -178,3 +178,7 @@ src/devdash/
   ui/devdash.tcss      all styling
 tests/                 config, git and process-manager tests
 ```
+
+## License
+
+[MIT](LICENSE) © Wahid Patel
