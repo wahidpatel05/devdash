@@ -1,0 +1,50 @@
+# devdash config — ~/.config/devdash/config.toml
+#
+# Paths support ~ and $ENV_VARS. A service's `cwd` is relative to the
+# project path unless absolute. `port` is optional; when set, devdash checks
+# whether something is listening on it.
+
+# Seconds between git status refreshes.
+refresh_interval = 3
+
+# "omarchy" follows your current Omarchy theme (and live-updates when you
+# switch). Any Textual theme name works too: "tokyo-night", "nord", ...
+theme = "omarchy"
+
+# Lines of output kept per service.
+log_lines = 5000
+
+# Every git repo directly inside these folders shows up automatically. If a
+# repo has a `dev` script in package.json (at its root, in a subfolder like
+# frontend/, or under apps/*), it becomes a service. List a project below to
+# override what was detected for it.
+scan_dirs = ["~/Projects"]
+
+[[projects]]
+name = "hackathon-app"
+path = "~/Projects/hackathon-app"
+
+  [[projects.services]]
+  name = "frontend"
+  command = "npm run dev"
+  port = 5173
+  cwd = "web"
+
+  [[projects.services]]
+  name = "api"
+  command = "uv run uvicorn app.main:app --reload --port 8000"
+  port = 8000
+  cwd = "api"
+
+[[projects]]
+name = "discord-bot"
+path = "~/Projects/discord-bot"
+
+  [[projects.services]]
+  name = "bot"
+  command = "python -m bot"
+
+  [[projects.services]]
+  name = "redis"
+  command = "redis-server --port 6380"
+  port = 6380

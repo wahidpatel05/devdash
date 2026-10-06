@@ -1,0 +1,189 @@
+/* devdash theme.
+ *
+ * Every colour the app uses is defined in this block. They're derived from the
+ * active Textual theme, which by default is built from your current Omarchy
+ * theme (theme = "omarchy" in config.toml), so they follow `omarchy theme set`.
+ *
+ * To override without editing this file, create ~/.config/devdash/devdash.tcss
+ * and redefine selectors there, e.g.:
+ *     #logs { background: #000000; }
+ *     LogView > .logview--error { color: #ff5555; }
+ */
+$dd-background: $background;
+$dd-border: $panel-lighten-2;
+$dd-border-focus: $accent;
+$dd-title: $accent;
+$dd-text: $foreground;
+$dd-muted: $foreground-muted;
+$dd-good: $success;
+$dd-warn: $warning;
+$dd-bad: $error;
+$dd-selection: $accent 25%;
+$dd-match: $accent;
+
+/* ---------------------------------------------------------------- layout */
+
+Screen {
+    background: $dd-background;
+    color: $dd-text;
+}
+
+* {
+    scrollbar-color: $dd-border;
+    scrollbar-color-hover: $dd-muted;
+    scrollbar-color-active: $dd-border-focus;
+    scrollbar-background: $dd-background;
+    scrollbar-background-hover: $dd-background;
+    scrollbar-background-active: $dd-background;
+    scrollbar-corner-color: $dd-background;
+}
+
+#main {
+    height: 1fr;
+}
+
+#sidebar {
+    width: 42;
+    min-width: 30;
+}
+
+#right {
+    width: 1fr;
+}
+
+#projects, #repo, #services, #logs {
+    border: round $dd-border;
+    border-title-color: $dd-title;
+    border-title-style: bold;
+    border-subtitle-color: $dd-muted;
+    background: $dd-background;
+    background-tint: transparent;
+    padding: 0 1;
+}
+
+#projects:focus-within, #services:focus, #logs:focus {
+    border: round $dd-border-focus;
+}
+
+#projects {
+    height: 1fr;
+    min-height: 5;
+}
+
+#repo {
+    height: auto;
+    max-height: 60%;
+}
+
+#services {
+    height: auto;
+    max-height: 40%;
+    min-height: 5;
+}
+
+#logs {
+    height: 1fr;
+    padding: 0;
+    scrollbar-size-vertical: 1;
+}
+
+#search {
+    dock: bottom;
+    margin: 0 1;
+    border: round $dd-border-focus;
+    background: $dd-background;
+}
+
+/* --------------------------------------------------------- project list */
+
+ProjectList > ProjectItem {
+    background: transparent;
+    padding: 0;
+}
+
+ProjectList > ProjectItem.-highlight {
+    background: $dd-selection;
+}
+
+ProjectList:focus > ProjectItem.-highlight {
+    background: $dd-selection;
+    text-style: bold;
+}
+
+ProjectItem Horizontal {
+    height: 1;
+}
+
+ProjectItem .dot {
+    width: 2;
+}
+
+ProjectItem .name {
+    width: 1fr;
+}
+
+ProjectItem .running {
+    width: auto;
+}
+
+/* ------------------------------------------------------------ git panel */
+
+RepoPanel .row {
+    height: auto;
+}
+
+RepoPanel .key {
+    width: 10;
+    color: $dd-muted;
+}
+
+RepoPanel .value {
+    width: 1fr;
+}
+
+/* ------------------------------------------------------- services table */
+
+ServicesTable {
+    scrollbar-size: 1 1;
+}
+
+ServicesTable > .datatable--header {
+    background: $dd-background;
+    color: $dd-muted;
+    text-style: bold;
+}
+
+ServicesTable > .datatable--cursor,
+ServicesTable:focus > .datatable--cursor {
+    background: $dd-selection;
+    color: $dd-text;
+}
+
+ServicesTable > .datatable--hover {
+    background: $dd-selection 50%;
+}
+
+ServicesTable > .services--good { color: $dd-good; }
+ServicesTable > .services--warn { color: $dd-warn; }
+ServicesTable > .services--bad  { color: $dd-bad; text-style: bold; }
+ServicesTable > .services--dim  { color: $dd-muted; }
+
+/* ------------------------------------------------------------- log view */
+
+LogView > .logview--error  { color: $dd-bad; text-style: bold; }
+LogView > .logview--stderr { color: $dd-warn; }
+LogView > .logview--system { color: $dd-title; text-style: italic; }
+LogView > .logview--match  { background: $dd-match; color: $dd-background; text-style: bold; }
+
+/* ------------------------------------------------------- status colours */
+
+.-good { color: $dd-good; }
+.-warn { color: $dd-warn; }
+.-bad  { color: $dd-bad; }
+.-dim  { color: $dd-muted; }
+
+#config-error {
+    border: round $dd-bad;
+    padding: 1 2;
+    max-width: 90;
+}
