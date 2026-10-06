@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 from enum import StrEnum
 from typing import Literal
 
-from devdash.config import Project, Service
+from devdash.config import Project, Service, short_path
 
 STOP_TIMEOUT = 5.0
 SHELL = "/bin/bash" if os.path.exists("/bin/bash") else "/bin/sh"
@@ -156,7 +156,7 @@ class ServiceManager:
         if ms.active:
             return
         svc = ms.service
-        self._log(ms, f"── starting: {svc.command}  (in {svc.cwd})", "sys")
+        self._log(ms, f"── starting: {svc.command}  (in {short_path(svc.cwd)})", "sys")
         if not svc.cwd.is_dir():
             ms.exit_code = None
             self._log(ms, f"── failed: working directory does not exist: {svc.cwd}", "sys")

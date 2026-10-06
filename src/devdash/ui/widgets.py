@@ -3,14 +3,13 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from pathlib import Path
 
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, VerticalScroll
 from textual.widgets import Label, ListItem, ListView
 
-from devdash.config import Project
+from devdash.config import Project, short_path
 from devdash.git import GitResult, RepoError, RepoStatus
 
 STATE_CLASSES = ("-good", "-warn", "-bad", "-dim")
@@ -32,13 +31,6 @@ def relative_time(when: datetime, now: datetime | None = None) -> str:
             n = seconds // size
             return f"{n} {unit}{'s' if n != 1 else ''} ago"
     return "just now"
-
-
-def short_path(path: Path) -> str:
-    try:
-        return "~/" + str(path.relative_to(Path.home()))
-    except ValueError:
-        return str(path)
 
 
 class ProjectItem(ListItem):

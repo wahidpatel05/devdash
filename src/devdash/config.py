@@ -150,6 +150,14 @@ def _expand(value: str) -> Path:
     return Path(os.path.expandvars(value)).expanduser()
 
 
+def short_path(path: Path) -> str:
+    """~/Projects/app instead of /home/you/Projects/app."""
+    try:
+        return "~/" + str(path.relative_to(Path.home()))
+    except ValueError:
+        return str(path)
+
+
 def _resolve(path: Path) -> Path:
     try:
         return path.resolve()

@@ -4,20 +4,7 @@ A terminal dashboard (built with [Textual](https://textual.textualize.io)) for y
 hackathon and dev projects. In one window you get git status for every project,
 start/stop/restart for their dev servers, and live, searchable logs.
 
-```
-┌ Projects ──────────────┐┌ Services ───────────────────────────────────────────┐
-│ ● hackathon-app    ▶ 2 ││ Service   Status     PID    Port  Listening  Uptime │
-│ ● discord-bot          ││ frontend  ● running  4121   5173  ● up       3m 12s │
-│ ✗ old-thing            ││ api       ■ exited 1 —      8000  ○ down     —      │
-└────────────────────────┘└─────────────────────────────────────────────────────┘
-┌ Git ───────────────────┐┌ Logs · api ─────────────────────────────────────────┐
-│ Branch    main         ││ ── starting: uv run uvicorn app.main:app --reload   │
-│ Remote    origin/main  ││ INFO:     Will watch for changes in these dirs      │
-│           ↑1 ↓0        ││▏ModuleNotFoundError: No module named 'fastapi'      │
-│ Changes   2 modified   ││ ── exited (exit code 1)                             │
-└────────────────────────┘└───────────────────────────────── /error  match 1/1 ─┘
- q Quit  s Start  x Stop  r Restart  / Search  c Clear log  g Git refresh  f Fetch
-```
+![devdash: projects and git status on the left, running services and live logs on the right](docs/screenshot.png)
 
 ## Install
 
